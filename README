@@ -1,0 +1,86 @@
+nahoSecurity plugin
+===================
+
+This plugin is the first step of a larger project of ACL in Symfony, coupled
+with sfGuardUser, which will offer a full interface to define access by 
+application/module/action.
+
+The current release allows you to automatically add a dynamic credential to
+your actions and modules.
+
+Once the plugin enabled, you just have to set "is_secure" to `on` in your
+application's security.yml, and each module/action will require the
+credential "application.module.action".
+
+
+Installation
+------------
+
+  * Install the plugin
+
+        $ symfony plugin-install http://plugins.symfony-project.com/nahoSecurityPlugin
+
+  * Clear you cache
+
+        $ symfony cc
+
+  * Change the security filter class in `filters.yml` :
+
+        [yml]
+        security:
+          class: nahoSecurityFilter 
+
+    Whenever you have already changed this value (for example, if you use sfGuardPlugin, 
+    branch 1.0, with the rememberMe feature enabled), see "Configuration" section below.
+
+Configuration
+-------------
+
+See plugin's `app.yml` to get default configuration with comments :
+
+    [yml]
+    all:
+      nahoSecurityPlugin: 
+        
+        # Set this to off to disable automatic credentials based on "auto_credential_format" option.
+        auto_credential: on
+        
+        # Format of the automatic added credential : you can use %application%, %module% and %action% in this string
+        auto_credential_format: 
+          application: "%application%"
+          module:      "%application%.%module%"
+          action:      "%application%.%module%.%action%"
+          
+        # Related to auto_credential : allows to affect "negative credentials" to the user.
+        # Example : I have "frontend.example" and "!frontend.example.something" credentials, 
+        # then I'll be able to access to all the "example" module's actions, except "something".
+        auto_credential_negate: "!"
+        
+        # nahoSecurityFilter supports "dynamic inheritance", change this value to make it extend another class than the usual sfBasicSecurityFilter
+        # For example, if you use sfGuardPlugin with "remember me" filter, set this option to "sfGuardBasicSecurityFilter"
+        filter_base_class: "sfBasicSecurityFilter"
+
+  * To disable the plugin's default behavior (automatically require "application.module.action" in each action), set 
+    `app_nahoSecurityPlugin_auto_credentials` to `off`
+
+  * Format of the automatic credentials can be customized per-level : define `app_nahoSecurityPlugin_auto_credential_format` formats
+    for each level : `application`, `module`, and `action`.
+    
+    In these formats, you can use keywords that will be replaced by the current element's name : 
+    
+      * `%application%` will be replaced by current application's name
+      
+      * `%module%` will be replaced by current module's name
+      
+      * `%action%` will be replaced by current action's name
+
+  * The `auto_credential_negate` option defines the prefix that marks a credential as negative. Note that it cannot be stacked :
+    `!permission` will cancel `permission`, but `!!permission` will not cancel `!permission`.
+    
+  * If you already had a customized class for `filter` security, you just have to set `filter_base_class` to this value. This way, `nahoSecurityFilter` 
+    will extend the given class (what I call "dynamic inheritance"), and simply allow you to use both features.
+
+TODO
+----
+
+  * nice grid/interface to define users' accesses.

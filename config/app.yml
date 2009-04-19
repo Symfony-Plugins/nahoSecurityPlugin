@@ -1,0 +1,21 @@
+all:
+  nahoSecurityPlugin: 
+    
+    # Set this to off to disable automatic credentials based on "auto_credential_format" option.
+    auto_credential: on
+    
+    # Format of the automatic added credential : you can use %application%, %module% and %action% in this string
+    auto_credential_format: 
+      application: "%application%"
+      module:      "%application%.%module%"
+      action:      "%application%.%module%.%action%"
+      
+    # Related to auto_credential : allows to affect "negative credentials" to the user.
+    # Example : I have "frontend.example" and "!frontend.example.something" credentials, 
+    # then I'll be able to access to all the "example" module's actions, except "something".
+    auto_credential_negate: "!"
+    
+    # nahoSecurityFilter supports "dynamic inheritance", change this value to make it extend another class than the usual sfBasicSecurityFilter
+    # For example, if you use sfGuardPlugin with "remember me" filter, set this option to "sfGuardBasicSecurityFilter"
+    filter_base_class: "sfBasicSecurityFilter"
+    

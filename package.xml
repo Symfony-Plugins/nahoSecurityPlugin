@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.7.1" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>nahoSecurityPlugin</name>
+ <channel>pear.symfony-project.com</channel>
+ <summary>Simple module/action ACL plugin.</summary>
+ <description>Once the plugin enabled, you just have to set "is_secure" to `on` in your
+application's security.yml, and each module/action will require the
+credential "application.module.action".</description>
+ <lead>
+  <name>Nicolas Chambrier (naholyr)</name>
+  <user>naholyr</user>
+  <email>naholyr@yahoo.fr</email>
+  <active>yes</active>
+ </lead>
+ <date>2009-04-15</date>
+ <time>19:31:24</time>
+ <version>
+  <release>0.1.0</release>
+  <api>0.1.0</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license uri="http://www.symfony-project.com/license">MIT license</license>
+ <notes>-</notes>
+ <contents>
+  <dir name="/">
+   <file md5sum="90049a15786208158fe0a7546c493fd6" name="config/app.yml" role="data"/>
+   <file md5sum="8826fdb55d81dac9208648353a13b6aa" name="lib/nahoSecurityFilter.php" role="data"/>
+   <file md5sum="ec5940da690b8ef545f33706ef31992e" name="README" role="data"/>
+   <file md5sum="22319e53eff7081217cbfe6e1addcb07" name="LICENSE" role="data"/>
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.0.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.1</min>
+   </pearinstaller>
+   
+  </required>
+ </dependencies>
+ <phprelease/>
+ <changelog>
+  <release>
+   <version>
+    <release>0.1.0</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <license uri="http://www.symfony-project.com/license">MIT license</license>
+   <license>MIT</license>
+   <date>2009-04-15</date>
+   <notes>* naholyr: first release, auto_credential features</notes>
+  </release>
+ </changelog>
+</package>
