@@ -6,7 +6,7 @@ eval(sprintf(
   sfConfig::get('app_nahoSecurityPlugin_filter_base_class', 'sfBasicSecurityFilter')
 ));
 
-class nahoSecurityFilter extends sfBasicSecurityFilter//BasenahoSecurityFilter
+class nahoSecurityFilter extends BasenahoSecurityFilter
 {
 
   /**
@@ -44,8 +44,8 @@ class nahoSecurityFilter extends sfBasicSecurityFilter//BasenahoSecurityFilter
         
         throw new sfStopException();
       }
-      
-      $this->addCredential($credential);
+
+      $this->addCredential($credentials);
     }
     
     parent::execute($filterChain);
@@ -61,17 +61,17 @@ class nahoSecurityFilter extends sfBasicSecurityFilter//BasenahoSecurityFilter
   {
     $negate = sfConfig::get('app_nahoSecurityPlugin_auto_credential_negate', '!');
     $user = $this->getContext()->getUser();
-    
-    if ($user->hasCredential($negate.$credential))
-    {
-      return false;
-    }
-    
+
     if ($user->hasCredential($credential))
     {
       return true;
     }
-    
+
+    if ($user->hasCredential($negate.$credential))
+    {
+      return false;
+    }
+
     return null;
   }
   
